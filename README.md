@@ -72,13 +72,13 @@ The URL you created for your MSFT Teams channel's webhook - if using our Docker 
 The GitHub repo to scan for PRs matching your configured criteria - if using our Docker approach, this needs to be set to a variable named `GITHUB_REPOSITORY` (GitHub Actions will set this for you by default).
 
 ***4. Head Prefixes to Ignore (optional)***
-You can configure Mariachi to exclude PRs with head branches that begin with certain words.  Add them as a comma separated string without spaces between each prefix (eg: `release,test`).
+You can configure Mariachi to exclude PRs with head branches that begin with certain words.  Add them as a comma separated string without spaces between each prefix (eg: `release,test`) - if using our Docker approach, this can be set to a variable named `INPUT_EXCLUDE_HEADS`.
 
 ***5. PR Labels to Ignore (optional)***
-You can also configure Mariachi to exclude PRs with certain labels. Add them as a comma separated string without spaces in between each label (eg `skip-mariachi,do not review`).
+You can also configure Mariachi to exclude PRs with certain labels. Add them as a comma separated string without spaces in between each label (eg `skip-mariachi,do not review`) - if using our Docker approach, this can be set to a variable named `INPUT_EXCLUDE_LABELS`.
 
 ***6. Minimum Reviews Required (optional)***
-The minimum number of reviews needed to have Mariachi notify Teams (default is 2).  A review is either an approval or a request for changes, but not a comment review.
+The minimum number of reviews needed to have Mariachi notify Teams (default is 2).  A review is either an approval or a request for changes, but not a comment review - if using our Docker approach, this can be set to a variable named `INPUT_MIN_REVIEWS`.
 
 
 ### FAQs ###
@@ -105,6 +105,6 @@ The suggested way of deploying the Mariachi executable is to use Docker.  This p
 
 ### Supporting Mariachi ####
 
-Support Mariachi on [GitHub Sponsors](https://github.com/sponsors/schlagelk). 
+Support Mariachi on [GitHub Sponsors](https://github.com/sponsors/schlagelk).
 
-We also accept ETH at the following wallet address 0xf6F7D616a481eb76863a29f2787Cf698D7b2CE67
+We also also accept ETH at the following wallet address `0xf6F7D616a481eb76863a29f2787Cf698D7b2CE67`.
