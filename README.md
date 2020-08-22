@@ -1,4 +1,4 @@
-# <img src="mariachi.png" alt="mariachi image" width="80" /> Mariachi 
+# <img src="mariachi.png" alt="mariachi image" width="80" /> Mariachi
 
 
 ## What is Mariachi?
@@ -30,17 +30,17 @@ jobs:
     - name: Mariachi
       uses: docker://schlagelk/mariachi:latest
       with:
-      github_token: ${{ secrets.GITHUB_TOKEN }} # this is the default token created by GitHub. you can also use a personal access token with repo scope enabled
-        teams_url: ${{ secrets.TEAMS_TOKEN }} # your Teams channel's webhook URL
+        github_token: ${{ secrets.GITHUB_TOKEN }} # this is the default token set and created by GitHub. you can also use a personal access token with repo scope enabled, but this one is already available
+        teams_url: ${{ secrets.TEAMS_TOKEN }} # your Teams channel's webhook URL. here we assume it's in your repo's secrets store
         exclude_heads: release,foo,bar # optional
-        exclude_labels: skip-reminder,do not review # optional 
+        exclude_labels: skip-reminder,do not review # optional
         min_reviews: 3 # optional
 ```
 
 #### CircleCI Example ####
 You need to do 2 things to set up Mariachi as a CircleCI workflow:
 1. Add 2 environment variables to your project:
-    1. `INPUT_GITHUB_TOKEN` - the GitHub Access token to use
+    1. `INPUT_GITHUB_TOKEN` - a GitHub Access token to use. See [our section on permissions](https://github.com/schlagelk/Mariachi#what-permissions-does-mariachi-need) for more.
     2. `INPUT_TEAMS_URL` - the webhook URL for your Teams channel
 2. Create a job in your project's config file and run it on a schedule.  See [this link](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) for how to set up a workflow to run on a schedule.  Here's an example job definition which pulls our Docker file and runs with a few parameters:
 
