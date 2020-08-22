@@ -63,13 +63,13 @@ pr_review_reminders:
 Checkout the entrypoint.sh file in the root of this repo to see an example of how to call Mariachi - it takes 3 required inputs and 3 optional inputs.  If using a GitHub Action approach, some of these variables are set for you automatically.
 
 ***1.  Your GitHub Token (required)***
-The GitHub token to use - if using our Docker approach, this needs to be set to a variable named `INPUT_GITHUB_TOKEN` (GitHub Actions will set this for you by default).
+The GitHub token to use - if using our Docker approach, this needs to be set to a variable named `INPUT_GITHUB_TOKEN`.
 
 ***2. Your MSFT Teams Webhook URL (required)***
 The URL you created for your MSFT Teams channel's webhook - if using our Docker approach, this needs to be set to a variable named `INPUT_TEAMS_URL`.
 
 ***3. The GitHub Repo to Scan (required)***
-The GitHub repo to scan for PRs matching your configured criteria - if using our Docker approach, this needs to be set to a variable named `GITHUB_REPOSITORY` (GitHub Actions will also set this for you by default).
+The GitHub repo to scan for PRs matching your configured criteria - if using our Docker approach, this needs to be set to a variable named `GITHUB_REPOSITORY` (GitHub Actions will set this for you by default).
 
 ***4. Head Prefixes to Ignore (optional)***
 You can configure Mariachi to exclude PRs with head branches that begin with certain words.  Add them as a comma separated string without spaces between each prefix (eg: `release,test`).
@@ -96,8 +96,8 @@ Yes - Mariachi is published under the Apache 2.0 license.  For more information,
 
 
 ### Building and Developing Mariachi ###
-Mariachi is built with Apple's Swift language, [Swift Argument Parser](https://github.com/apple/swift-argument-parser) and Swift Package Manager.  You can clone the repo and open `Package.swift` to launch the project in Xcode.  If you wish to build and run the Mariachi executbale, you can run `swift build -c release` from the project root - this gives you an exectuable located at `.build/release/mariachi` ready for release.
+Mariachi is built with Apple's Swift language, [Swift Argument Parser](https://github.com/apple/swift-argument-parser) and Swift Package Manager.  You can clone the repo and open `Package.swift`if you are familiar with Swift Package Manager.  If you wish to just build and run the Mariachi executbale, you can run `swift build -c release` from the project root - this gives you an exectuable located at `.build/release/mariachi` ready for release.
 
-The project also comes with some very basic unit tests - you can run those from the project root using `swift test` or using Xcode's interface.
+The project also comes with some very basic unit tests - you can run those from the project root using `swift test`.
 
 The suggested way of deploying the Mariachi executable is to use Docker.  This project contains a Dockerfile as well as an entrypoint script (entrypoint.sh) used by the Docker container.  This script just checks if certain variables are set before executing the Mariachi exectuable on the server where configured.
