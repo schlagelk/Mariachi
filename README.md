@@ -38,7 +38,11 @@ jobs:
 ```
 
 #### CircleCI Example ####
-All you need to do is create a new job in your config file and then call that job from a workflow - you can see [this link](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) for how to set up a workflow to run on a schedule.  Here's an example job definition which pulls our Docker file and runs with a few parameters:
+You need to do 2 things to set up Mariachi as a CircleCI workflow:
+1. Add 2 environment variables to your project:
+    1. `INPUT_GITHUB_TOKEN` - the GitHub Access token to use
+    2. `INPUT_TEAMS_URL` - the webhook URL for your Teams channel
+2. Create a job in your project's config file and run it on a schedule.  See [this link](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) for how to set up a workflow to run on a schedule.  Here's an example job definition which pulls our Docker file and runs with a few parameters:
 
 ```yml
 pr_review_reminders:
