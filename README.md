@@ -1,4 +1,4 @@
-# <img src="mariachi.png" alt="mariachi image" width="80" border-radius="40px" /> Mariachi 
+# <img src="mariachi.png" alt="mariachi image" width="80" /> Mariachi 
 
 
 ## What is Mariachi?
