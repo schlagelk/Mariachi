@@ -101,3 +101,8 @@ Mariachi is built with Apple's Swift language, [Swift Argument Parser](https://g
 The project also comes with some very basic unit tests - you can run those from the project root using `swift test`.
 
 The suggested way of deploying the Mariachi executable is to use Docker.  This project contains a Dockerfile as well as an entrypoint script (entrypoint.sh) used by the Docker container.  This script just checks if certain variables are set before executing the Mariachi exectuable on the server where configured.
+
+
+### Supporting Mariach ####
+
+We're up on [GitHub Sponsors](https://github.com/sponsors/schlagelk). We also accept ETH at the following wallet 0xf6F7D616a481eb76863a29f2787Cf698D7b2CE67
