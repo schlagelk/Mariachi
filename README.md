@@ -1,8 +1,8 @@
-# <img src="mariachi.png" alt="drawing" width="80" style="border-radius: 40px" /> Mariachi 
+# <img src="mariachi.png" alt="mariachi image" width="80" border-radius="40px" /> Mariachi 
 
 
 ## What is Mariachi?
-Mariachi sends Pull Request review reminders to MSFT Teams channels.  You can configure it to run for Pull Requests in your GitHub repo with a single `mariachi.yml` file, or set it up to run on your servers when you want.  Set the minimum required reviews for each PR, PR labels you wish to ignore, and add head branch prefixes to exclude.
+Mariachi sends Pull Request review reminders to MSFT Teams channels.  You can configure it to run for Pull Requests in your GitHub repo with a single `mariachi.yml` file, or set it up to run on your servers when you want.  Set the minimum required reviews for each PR, PR labels you wish to ignore and add head branch prefixes to exclude.
 
 ### Requirements
 You only need to be able to do the following 2 things to add Mariachi and start receiving review reminders in Teams
@@ -73,6 +73,6 @@ Yes - Mariachi is published under the Apache 2.0 license.  For more information,
 ### Building and Developing Mariachi ####
 Mariachi is built with Apple's Swift language, [Swift Argument Parser](https://github.com/apple/swift-argument-parser) and Swift Package Manager.  You can clone the repo and open `Package.swift` to launch the project in Xcode.  If you wish to build and run the Mariachi executbale, you can run `swift build -c release` from the project root - this gives you an exectuable located at `.build/release/mariachi` ready for release.
 
-The project also comes with some very basic unit tests - you can run those from the project root using `swift test`, or with Xcode's interface.
+The project also comes with some very basic unit tests - you can run those from the project root using `swift test` or using Xcode's interface.
 
-The suggested way of deploying the Mariachi executable is to use Docker.  This project contains a Dockerfile as well as an entrypoint script (`entrypoint.sh`) used by the Docker container.  This script just checks if certain variables are set before executing the Mariachi exectuable.
+The suggested way of deploying the Mariachi executable is to use Docker.  This project contains a Dockerfile as well as an entrypoint script (entrypoint.sh) used by the Docker container.  This script just checks if certain variables are set before executing the Mariachi exectuable on the server where configured.
