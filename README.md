@@ -33,12 +33,12 @@ jobs:
       github_token: ${{ secrets.GITHUB_TOKEN }} # this is the default token created by GitHub. you can also use a personal access token with repo scope enabled
         teams_url: ${{ secrets.TEAMS_TOKEN }} # your Teams channel's webhook URL
         exclude_heads: release,foo,bar # optional
-        exclude_labels: skip-reminder,do not review #optional 
-        min_reviews: 3 #optional
+        exclude_labels: skip-reminder,do not review # optional 
+        min_reviews: 3 # optional
 ```
 
 #### CircleCI Example ####
-All you need to do is create a new job in your config file and then call that job from a workflow - you can see [this link](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) for how to set up a workflow to run on a schedule:
+All you need to do is create a new job in your config file and then call that job from a workflow - you can see [this link](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) for how to set up a workflow to run on a schedule.  Here's an example job definition which pulls our Docker file and runs with a few parameters:
 
 ```yml
 pr_review_reminders:
@@ -55,7 +55,7 @@ pr_review_reminders:
 ```
 
 
-#### Input Parameters ####
+### Input Parameters ###
 Checkout the entrypoint.sh file in the root of this repo to see an example of how to call Mariachi - it takes 3 required inputs and 3 optional inputs.  If using a GitHub Action approach, some of these variables are set for you automatically.
 
 ***1.  Your GitHub Token (required)***
@@ -67,8 +67,8 @@ The URL you created for your MSFT Teams channel's webhook - if using our Docker 
 ***3. The GitHub Repo to Scan (required)***
 The GitHub repo to scan for PRs matching your configured criteria - if using our Docker approach, this needs to be set to a variable named `GITHUB_REPOSITORY` (GitHub Actions will also set this for you by default).
 
-***4. HEAD Prefixes to Ignore (optional)***
-You can configure Mariachi to exclude PRs with head branches that begin with certain words.  Add them as a comma separated single string without spaces (eg: `release,test`).
+***4. Head Prefixes to Ignore (optional)***
+You can configure Mariachi to exclude PRs with head branches that begin with certain words.  Add them as a comma separated string without spaces between each prefix (eg: `release,test`).
 
 ***5. PR Labels to Ignore (optional)***
 You can also configure Mariachi to exclude PRs with certain labels. Add them as a comma separated string without spaces in between each label (eg `skip-mariachi,do not review`).
@@ -79,7 +79,7 @@ The minimum number of reviews needed to have Mariachi notify Teams (default is 2
 
 ### FAQs ###
 #### What Permissions Does Mariachi Need? ####
-Mariachi does not require anything but read access, however there are certain limitations to GitHub's access tokens as modifying their access levels is somewhat limited.  If using a GitHub Action approach, the default token created by GitHub comes with the following permissions which are limited to your repo only: [see here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).  If you are using a personal access token instead, you'll need to check the entire repo scope.
+Mariachi does not require anything but read access, however there are certain limitations to GitHub's access tokens as modifying their access levels is limited.  If using a GitHub Action approach, the default token created by GitHub comes with the following permissions which are limited to your repo only - [see here for more](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token).  If you are using a personal access token instead, you'll need to check the entire repo scope.
 
 #### What Counts as a Review? ####
 Mariachi considers a review to be either an approval or a request for changes.
