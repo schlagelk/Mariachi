@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mariachi</title>
+    <link rel="icon" href="mariachi.png">
+
+    <script src="jquery-3.5.1.min.js"></script>
+    <link href="bulma.min.css" rel="stylesheet">
+    <link href="font.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="description" content="Pull Request review reminders for MSFT Teams">
+    <meta name="keywords" content="Pull Request, Review, Reminder, Microsoft Teams, GitHub">
+
+    <meta property="og:title" content="Mariachi" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mariachi.app" />
+    <meta property="og:image" content="https://mariachi.app/mariachi.png" />
+    <meta property="og:description" content="Pull Request reminders for MSFT Teams." />
+
+    <script>
+      $(document).ready(function() {
+        // Check for click events on the navbar burger icon
+        $(".navbar-burger").click(function() {
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+        });
+      });
+    </script>
+  </head>
+  <body class="has-navbar-fixed-top" id="body">
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#body">
+          <img src="mariachi.png" style='max-height: none;border-radius:40px' width="80" height="80">
+        </a>
+
+        <a class="navbar-item" href="#body">
+          <span style="font-size:1.5rem;font-weight:600">
+            Mariachi
+          </span>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="#docs">
+            How It Works
+          </a>
+          <a class="navbar-item" href="#support">
+            Back It
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="#beta">
+                <strong>Install</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  <section class="section has-text-centered" id="about">
+    <div>
+      <h1 class="title">
+        Pull Request review reminders for MSFT Teams & GitHub
+      </h1>
+      <p>
+      Set the minimum number of reviews needed and ignore head branches by prefix/label.
+      <p>
+      <p class="has-text-centered">
+          Open Sourced on GitHub <a style="vertical-align:middle" target="_blank" href="https://github.com/schlagelk/Mariachi"><img src="https://mariachi.app/gh.png" width="30" height="30"> </a>
+      </p>
+      <a style="margin-top:14px" class="button is-primary" href="#beta">
+        <strong>Install</strong>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="docs">
+    <div class="container" style="margin:1em;font-size:.9em;margin:auto">
+      <div style="margin-bottom:5em">
+        <h1 class="title has-text-centered">
+          How It Works
+        </h1>
+
+        <div class="panel" style="box-shadow:none">
+          <p class="panel-heading">
+            Get reminders in 2 steps:
+          </p>
+          <ul>
+            <li style="margin:10px">
+              <a href="#step-1" style="color:white">
+                <p class="stp">
+                  <span>1</span>
+                </p>
+                <span style="color:black">
+                  Create an Incoming Webhook Connector in your MSFT Teams channel
+                </span>
+              </a>
+            </li>
+            <li style="margin:10px">
+              <a href="#step-2" style="color:white">
+                <p class="stp">
+                  <span>2</span>
+                </p>
+                <span style="color:black">
+                  Configure Mariachi to run as a GitHub Action or on any of your servers
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p style="text-align:right">
+            <a href="#step-1"> See how</a>
+          </p>
+        </div>
+      </div>
+
+      <div style="padding-top:7em" id="step-1">
+        <div class="has-text-centered" style="margin-bottom:25px;font-weight:700">
+          <p class="stp">
+            <span>1</span>
+          </p>
+        </div>
+        <div class="panel">
+          <p class="panel-heading">
+          Step 1 - Create an Incoming Webhook Connector in your MSFT Teams channel.
+          </p>
+          <p class="pb">
+          Follow <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel" target="_blank" >these </a>instructions (pasted below) from MSFT for adding a connector to your channel.  You'll need the URL you create in the next step.
+          </p>
+          <ul>
+            <li class="pb">
+              ∙ Navigate to the channel where you want to add the webhook and select (•••) More Options from the top navigation bar.
+            </li>
+            <li class="pb">
+              ∙ Choose Connectors from the drop-down menu and search for Incoming Webhook.
+            </li>
+            <li class="pb">
+              ∙ Select the Configure button, provide a name (Mariachi), and, optionally, upload an image avatar for your webhook.
+                <ul>
+                  <li style='margin-left:20px;font-size:.9em'>
+                    ∙ You can use <a href="mariachi.png" download>our image</a> if you'd like
+                  </li>
+                </ul>
+            </li>
+            <li class="pb">
+              ∙ The dialog window will present a unique URL that will map to the channel. Make sure that you copy and save the URL—you will need to add it to your mariachi.yml file in the next step.
+              <ul>
+                <li style='margin-left:20px;font-size:.9em'>
+                  ∙ Eg: https://outlook.office.com/webhook/{string}/IncomingWebhook/{string}
+                </li>
+              </ul>
+            </li>
+            <li class="pb">
+              ∙ Select the Done button. The webhook will be available in the team channel.
+            <li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="step-2">
+    <div class="has-text-centered" style="margin-bottom:25px;font-weight:700;">
+      <p class="stp">
+        <span>2</span>
+      </p>
+    </div>
+    <div class="container" style="margin:1em;font-size:.9em;margin:auto">
+      <div class="panel">
+        <p class="panel-heading">
+        Step 2 - Add a mariachi.yml file to set up Mariachi as a GitHub Action (recommended*)
+        </p>
+        <pre>
+  <span class="pl-ent">name</span>: <span class="pl-s">Mariachi</span>
+  <span class="pl-ent">on</span>:
+  <span class="pl-ent">schedule</span>:
+    - <span class="pl-ent">cron</span>: <span class="pl-s"><span class="pl-pds">"</span>0 15 * * *<span class="pl-pds">"</span><span class='comment'> # run every morning (time in GMT)</span></span>
+  <span class="pl-ent">jobs</span>:
+    <span class="pl-ent">remind</span>:
+      <span class="pl-ent">runs-on</span>: <span class="pl-s">ubuntu-latest</span>
+      <span class="pl-ent">steps</span>:
+      - <span class="pl-ent">name</span>: <span class="pl-s">Mariachi</span>
+      <span class="pl-ent">uses</span>: <span class="pl-s">docker://schlagelk/mariachi:latest</span>
+        <span class="pl-ent">with</span>:
+          <span class="pl-ent">github_token</span>: <span class="pl-s">${{ secrets.GITHUB_TOKEN }}</span>
+          <span class="pl-ent">teams_url</span>: <span class="pl-s">${{ secrets.TEAMS_TOKEN }} </span><span class='comment'># your Teams URL from step 1</span>
+          <span class="pl-ent">exclude_heads</span>: <span class="pl-s">release,test</span><span class='comment'> # optional</span>
+          <span class="pl-ent">exclude_labels</span>: <span class="pl-s">do-not-review,skip-mariachi</span><span class='comment'> # optional</span>
+          <span class="pl-ent">min_reviews</span>: <span class="pl-c1">3</span><span class='comment'> # optional, defaults to 2</span></pre>
+      </div>
+    </div>
+    <p class="has-text-centered" style="font-size:.88em;width:80%;margin:auto;margin-top:2.5em">
+      *Mariachi does not have to be set up as a GitHub Action - you can use any server you have.
+      <br> See our repo for more examples <a style="vertical-align:middle" target="_blank" href="https://github.com/schlagelk/Mariachi"><img src="https://mariachi.app/gh.png" width="30" height="30"> </a>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="has-text-centered" style="margin-bottom:25px;font-weight:700">
+      <p class="stp">
+        <span>3</span>
+      </p>
+    </div>
+    <div class="container" style="margin:1em;font-size:.9em;margin:auto">
+      <div class="panel" id="step-3">
+        <p class="panel-heading">
+        Step 3 - Get reminders
+        </p>
+
+        <img src="mariachiinteams.png" >
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="beta" style="margin-bottom:8em">
+    <div>
+      <h1 class="title has-text-centered">
+        Set up Mariachi in no time
+      </h1>
+      <p class="has-text-centered">
+        Find detailed instructions for setting up Mariachi on our GitHub repo <a style="vertical-align:middle" target="_blank" href="https://github.com/schlagelk/Mariachi"><img src="https://mariachi.app/gh.png" width="30" height="30"> </a>
+      <p>
+      <p class="has-text-centered">
+        Need help configuring Mariachi? Send us an email hola<span style="color:#6e1fa6">@</span>mariachi.app
+      <p>
+    </div>
+  </section>
+
+  <section class="section" id="support" style="margin-bottom:8em">
+    <div>
+      <h1 class="title has-text-centered">
+        Mariachi is free and open source
+      </h1>
+      <p class="has-text-centered">
+        You can support Mariachi by sponsoring the project on <a target="_blank" href="https://github.com/sponsors/schlagelk">GitHub Sponsors</a>
+      <p>
+      <p class="has-text-centered">
+        We'll also gladly accept ETH at the following wallet address <br> <code>0xf6F7D616a481eb76863a29f2787Cf698D7b2CE67</code>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Mariachi</strong> by Kenny Schlagel
+      </p>
+      <p>
+        Pull Request review reminders for MSFT Teams
+      </p>
+      <p>
+        ©2020 All rights reserved
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,42 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+.section {
+  padding-top: 7em;
+  padding-bottom: 4em;
+}
+a {
+  color: #6e1fa6
+}
+.panel {
+    max-width:700px;
+    overflow: scroll;
+    margin:auto;
+}
+.panel-heading {
+  background-color:white;
+  border-bottom: 1px solid lightgray
+}
+.button.is-primary {
+  background-color:#6e1fa6
+}
+.button.is-primary:hover {
+  background-color:black
+}
+.comment {
+  font-style: italic;
+  color: gray;
+}
+.pb {
+  padding: .75em 1em;
+}
+.stp {
+  background-color: #6e1fa6;
+  color:white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
