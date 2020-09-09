@@ -167,7 +167,7 @@ final class MariachiUnitTests: XCTestCase {
     XCTAssertEqual(message.sections.count, 1)
     XCTAssertEqual(message.sections.first!.facts.count, 2)
   }
-  
+
   func testRequestedReviewers() throws {
     let prData: [String: Any] =
        [
@@ -184,7 +184,7 @@ final class MariachiUnitTests: XCTestCase {
     let data = try JSONSerialization.data(withJSONObject: prData, options: [])
     let pr = try JSONDecoder().decode(PullRequest.self, from: data)
     XCTAssertEqual(pr.awaitingReviewers.count, 1)
-    
+
     // assert actual reviewer doesn't get added to `awaitingReviewers`
     let prData1: [String: Any] =
        [
@@ -210,11 +210,11 @@ final class MariachiUnitTests: XCTestCase {
     let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
     pr1.reviews = reviews
     XCTAssertEqual(pr1.awaitingReviewers.count, 0)
-    
+
     let message = TeamsClient(webhookURL: URL(string: "127.0.0.1")!).message(from: [pr, pr1], in: "foo/bar")
     XCTAssertEqual(message.sections.count, 1)
     XCTAssertEqual(message.sections.first!.facts.count, 2)
-    
+
     let firstFact = message.sections.first!.facts.first!
     XCTAssertEqual(firstFact.value, "@schlagelk [github.com/safadf/124](github.com/safadf/124)<br>&nbsp;&nbsp;&nbsp; - waiting on @jbond")
   }

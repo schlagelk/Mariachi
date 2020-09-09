@@ -62,7 +62,7 @@ public final class TeamsClient {
     let messageCard = MessageCard(themeColor: themeColor, summary: message, sections: [section])
     return messageCard
   }
-  
+
   private func makeFactValue(from pull: PullRequest) -> String {
     var value = "@\(pull.user.name) [\(pull.url)](\(pull.url))"
     for awaiting in pull.awaitingReviewers {

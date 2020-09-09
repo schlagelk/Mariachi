@@ -41,7 +41,7 @@ public class PullRequest: Decodable {
       }
       return false
   }
-  
+
   var awaitingReviewers: [User] {
     guard let requestedReviewers = requestedReviewers else { return [] }
     var awaiting = [User]()
