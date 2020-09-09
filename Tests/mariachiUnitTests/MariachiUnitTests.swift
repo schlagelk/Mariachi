@@ -27,9 +27,9 @@ final class MariachiUnitTests: XCTestCase {
   func testReviewData() throws {
     let reviewsData: [[String: Any]] =
       [
-        ["state": "APPROVED"],
-        ["state": "CHANGES_REQUESTED"],
-        ["state": "bad"]
+        ["user": ["login": "jbond"], "state": "APPROVED"],
+        ["user": ["login": "ljames"], "state": "CHANGES_REQUESTED"],
+        ["user": ["login": "dwade"], "state": "bad"]
       ]
     let reviewData = try JSONSerialization.data(withJSONObject: reviewsData, options: [])
     let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
@@ -56,9 +56,9 @@ final class MariachiUnitTests: XCTestCase {
     let pr = try JSONDecoder().decode(PullRequest.self, from: data)
     let reviewsData: [[String: Any]] =
       [
-         ["state": "APPROVED"],
-         ["state": "CHANGES_REQUESTED"],
-         ["state": "bad"]
+         ["user": ["login": "jbond"], "state": "APPROVED"],
+         ["user": ["login": "ljames"], "state": "CHANGES_REQUESTED"],
+         ["user": ["login": "dwade"], "state": "bad"]
        ]
     let reviewData = try JSONSerialization.data(withJSONObject: reviewsData, options: [])
     let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
@@ -80,8 +80,8 @@ final class MariachiUnitTests: XCTestCase {
     let pr1 = try JSONDecoder().decode(PullRequest.self, from: data1)
     let reviewsData1: [[String: Any]] =
       [
-         ["state": "APPROVED"],
-         ["state": "APPROVED"]
+         ["user": ["login": "jbond"], "state": "APPROVED"],
+         ["user": ["login": "ljames"], "state": "APPROVED"]
       ]
     let reviewData1 = try JSONSerialization.data(withJSONObject: reviewsData1, options: [])
     let reviews1 = try JSONDecoder().decode([Review].self, from: reviewData1)
@@ -119,7 +119,7 @@ final class MariachiUnitTests: XCTestCase {
     let pr3 = try JSONDecoder().decode(PullRequest.self, from: data3)
     let reviewsData3: [[String: Any]] =
       [
-        ["state": "COMMENTED"]
+        ["user": ["login": "jbond"], "state": "COMMENTED"]
       ]
     let reviewData3 = try JSONSerialization.data(withJSONObject: reviewsData3, options: [])
     let reviews3 = try JSONDecoder().decode([Review].self, from: reviewData3)
@@ -167,11 +167,63 @@ final class MariachiUnitTests: XCTestCase {
     XCTAssertEqual(message.sections.count, 1)
     XCTAssertEqual(message.sections.first!.facts.count, 2)
   }
+  
+  func testRequestedReviewers() throws {
+    let prData: [String: Any] =
+       [
+         "head": ["ref": "foo/bar"],
+         "labels": [],
+         "draft": false,
+         "number": 123,
+         "html_url": "github.com/safadf/124",
+         "title": "Make Bar Conform to Foo",
+         "user": ["login": "schlagelk"],
+         "reviews": [],
+         "requested_reviewers": [["login": "jbond"]]
+       ]
+    let data = try JSONSerialization.data(withJSONObject: prData, options: [])
+    let pr = try JSONDecoder().decode(PullRequest.self, from: data)
+    XCTAssertEqual(pr.awaitingReviewers.count, 1)
+    
+    // assert actual reviewer doesn't get added to `awaitingReviewers`
+    let prData1: [String: Any] =
+       [
+         "head": ["ref": "foo/bar"],
+         "labels": [],
+         "draft": false,
+         "number": 123,
+         "html_url": "github.com/safadf/124",
+         "title": "Make Bar Conform to Foo",
+         "user": ["login": "schlagelk"],
+         "reviews": [],
+         "requested_reviewers": [["login": "jbond"]]
+       ]
+    let data1 = try JSONSerialization.data(withJSONObject: prData1, options: [])
+    let pr1 = try JSONDecoder().decode(PullRequest.self, from: data1)
+    let reviewsData: [[String: Any]] =
+      [
+        ["state": "APPROVED", "user": ["login": "jbond"]],
+        ["state": "CHANGES_REQUESTED", "user": ["login": "dwade"]],
+        ["state": "bad", "user": ["login": "ljames"]]
+       ]
+    let reviewData = try JSONSerialization.data(withJSONObject: reviewsData, options: [])
+    let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
+    pr1.reviews = reviews
+    XCTAssertEqual(pr1.awaitingReviewers.count, 0)
+    
+    let message = TeamsClient(webhookURL: URL(string: "127.0.0.1")!).message(from: [pr, pr1], in: "foo/bar")
+    XCTAssertEqual(message.sections.count, 1)
+    XCTAssertEqual(message.sections.first!.facts.count, 2)
+    
+    let firstFact = message.sections.first!.facts.first!
+    XCTAssertEqual(firstFact.value, "@schlagelk [github.com/safadf/124](github.com/safadf/124)<br>&nbsp;&nbsp;&nbsp; - waiting on @jbond")
+  }
 
   static var allTests = [
     ("testPullRequestData", testPullRequestData),
     ("testReviewData", testReviewData),
     ("testPullRequestArrayData", testPullRequestArrayData),
-    ("testTeamsMessage", testTeamsMessage)
+    ("testTeamsMessage", testTeamsMessage),
+    ("testRequestedReviewers", testRequestedReviewers)
   ]
 }

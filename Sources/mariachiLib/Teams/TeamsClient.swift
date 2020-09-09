@@ -54,12 +54,20 @@ public final class TeamsClient {
 
     var facts = [Fact]()
     for pull in pulls {
-      let fact = Fact(name: pull.title ?? "", value: "@\(pull.user.name) [\(pull.url)](\(pull.url))")
+      let fact = Fact(name: pull.title ?? "", value: makeFactValue(from: pull))
       facts.append(fact)
     }
     let section = Section(activityTitle: message, activitySubtitle: repo, activityImage: iconURL, facts: facts, markdown: true)
 
     let messageCard = MessageCard(themeColor: themeColor, summary: message, sections: [section])
     return messageCard
+  }
+  
+  private func makeFactValue(from pull: PullRequest) -> String {
+    var value = "@\(pull.user.name) [\(pull.url)](\(pull.url))"
+    for awaiting in pull.awaitingReviewers {
+      value.append("<br>&nbsp;&nbsp;&nbsp; - waiting on @\(awaiting.login)")
+    }
+    return value
   }
 }

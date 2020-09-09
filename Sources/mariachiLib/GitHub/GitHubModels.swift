@@ -16,10 +16,12 @@ public class PullRequest: Decodable {
   var title: String?
   let user: User
   var reviews: [Review]?
+  var requestedReviewers: [User]?
 
   private enum CodingKeys: String, CodingKey {
     case number, head, labels, draft, title, user, reviews
     case url = "html_url"
+    case requestedReviewers = "requested_reviewers"
   }
 
   var isDraft: Bool {
@@ -39,6 +41,18 @@ public class PullRequest: Decodable {
       }
       return false
   }
+  
+  var awaitingReviewers: [User] {
+    guard let requestedReviewers = requestedReviewers else { return [] }
+    var awaiting = [User]()
+    let reviewers = reviews?.compactMap { $0.user }
+    for requested in requestedReviewers {
+      if reviewers?.contains(requested) == false {
+        awaiting.append(requested)
+      }
+    }
+    return awaiting
+  }
 }
 
 public struct Label: Decodable {
@@ -49,7 +63,7 @@ public struct Head: Decodable {
   let ref: String
 }
 
-public struct User: Decodable {
+public struct User: Decodable, Equatable {
   let login: String
 
   var name: String {
@@ -59,6 +73,7 @@ public struct User: Decodable {
 
 public struct Review: Decodable {
   let state: String
+  let user: User
 
   var reviewState: String {
       state
