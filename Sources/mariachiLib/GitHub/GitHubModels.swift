@@ -71,7 +71,7 @@ public struct User: Decodable, Equatable {
   }
 }
 
-public struct Review: Decodable {
+public class Review: Decodable {
   let state: String
   let user: User
 
@@ -100,11 +100,17 @@ public extension Array where Element: PullRequest {
   func needing(minApprovals: Int) -> [PullRequest] {
       var needingApprovalsTemp = [PullRequest]()
       for pull in self {
-          let approvedReviews = pull.reviews?.filter { $0.isReviewed }.count ?? 0
-          if approvedReviews < minApprovals {
+        let validReviews = pull.reviews?.filter { $0.isReviewed }.uniquingReviewers.count ?? 0
+          if validReviews < minApprovals {
               needingApprovalsTemp.append(pull)
           }
       }
       return needingApprovalsTemp
+  }
+}
+public extension Array where Element: Review {
+  var uniquingReviewers: [Review] {
+    var seen = [String: Review]()
+    return self.filter { seen.updateValue($0, forKey: $0.user.login) == nil }
   }
 }

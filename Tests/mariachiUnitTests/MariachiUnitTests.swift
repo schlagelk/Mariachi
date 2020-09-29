@@ -39,6 +39,18 @@ final class MariachiUnitTests: XCTestCase {
     XCTAssertFalse(reviews[2].isReviewed)
   }
 
+  func testUniquingUsers() throws {
+    let reviewsData: [[String: Any]] =
+      [
+        ["user": ["login": "jbond"], "state": "APPROVED"],
+        ["user": ["login": "jbond"], "state": "CHANGES_REQUESTED"]
+      ]
+    let reviewData = try JSONSerialization.data(withJSONObject: reviewsData, options: [])
+    let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
+
+    XCTAssertEqual(reviews.uniquingReviewers.count, 1)
+  }
+
   func testPullRequestArrayData() throws {
     // first PR
     let prData: [String: Any] =
@@ -224,6 +236,7 @@ final class MariachiUnitTests: XCTestCase {
     ("testReviewData", testReviewData),
     ("testPullRequestArrayData", testPullRequestArrayData),
     ("testTeamsMessage", testTeamsMessage),
-    ("testRequestedReviewers", testRequestedReviewers)
+    ("testRequestedReviewers", testRequestedReviewers),
+    ("testUniquingUsers", testUniquingUsers)
   ]
 }
