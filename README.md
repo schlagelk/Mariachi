@@ -92,7 +92,7 @@ Mariachi considers a review to be either an approval or a request for changes.
 <img src="mariachiinteams.png" alt="drawing"  />
 
 #### Can I Fork Mariachi for My Enterprise Needs? ####
-Yes - Mariachi is published under the Apache 2.0 license.  For more information, please view the [LICENSE.txt](https://github.com/schlagelk/Mariachi/blob/master/LICENSE.txt) file.
+Yes - Mariachi is published under the Apache 2.0 license.  For more information, please view the [LICENSE.txt](https://github.com/schlagelk/Mariachi/blob/main/LICENSE.txt) file.
 
 
 ### Building and Developing Mariachi ###

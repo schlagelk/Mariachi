@@ -1,6 +1,6 @@
 //
 //  TeamsClient.swift
-//  
+//
 //
 //  Created by Kenny Schlagel on 7/27/20.
 //
@@ -49,7 +49,7 @@ public final class TeamsClient {
   public func message(from pulls: [PullRequest], in repo: String) -> MessageCard {
     // TODO: - make themeColor and message configurable
     let themeColor = "6E33FF"
-    let iconURL = "https://raw.githubusercontent.com/schlagelk/MLTalk/master/mariachi.png"
+    let iconURL = "https://raw.githubusercontent.com/schlagelk/MLTalk/main/mariachi.png"
     let message = "\(pulls.count) PR(s) need reviews"
 
     var facts = [Fact]()
