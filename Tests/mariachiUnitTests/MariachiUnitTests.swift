@@ -178,6 +178,8 @@ final class MariachiUnitTests: XCTestCase {
     let message = client.message(from: [pr, pr1], in: "foo/bar")
     XCTAssertEqual(message.sections.count, 1)
     XCTAssertEqual(message.sections.first!.facts.count, 2)
+    let lastFact = message.sections.first!.facts.last!
+    XCTAssertTrue(lastFact.value.contains(TeamsClient.footer))
   }
 
   func testRequestedReviewers() throws {

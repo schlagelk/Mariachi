@@ -16,6 +16,7 @@ import FoundationNetworking
 
 public final class TeamsClient {
   private let hookURL: URL
+  static let footer = "<div style='float:right;font-size:.8em'>🎺 Support Mariachi on <a href='https://github.com/schlagelk/mariachi'>GitHub</a></div>"
 
   public init(webhookURL url: URL) {
       self.hookURL = url
@@ -56,6 +57,10 @@ public final class TeamsClient {
     for pull in pulls {
       let fact = Fact(name: pull.title ?? "", value: makeFactValue(from: pull))
       facts.append(fact)
+    }
+    // add footer to the last `Fact` string value cause Teams
+    if !facts.isEmpty {
+      facts[facts.count - 1].appendFooter(footer: Self.footer)
     }
     let section = Section(activityTitle: message, activitySubtitle: repo, activityImage: iconURL, facts: facts, markdown: true)
 

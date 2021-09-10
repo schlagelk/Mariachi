@@ -10,6 +10,10 @@ import Foundation
 public struct Fact: Codable {
   var name: String
   var value: String
+
+  mutating func appendFooter(footer: String) {
+    value = value + "<br>" + footer
+  }
 }
 
 public struct Section: Codable {
