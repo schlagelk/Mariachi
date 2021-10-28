@@ -141,7 +141,7 @@ final class MariachiUnitTests: XCTestCase {
     XCTAssertEqual(allThePRs.notDrafs.count, 3)
     XCTAssertEqual(allThePRs.without(labels: ["skip-mariachi"]).count, 3)
     XCTAssertEqual(allThePRs.without(prefixes: ["release"]).count, 3)
-    XCTAssertEqual(allThePRs.needing(minApprovals: 2).count, 2)
+    XCTAssertEqual(allThePRs.needing(minApprovals: 2).count, 3)
   }
 
   func testTeamsMessage() throws {
