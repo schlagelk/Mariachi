@@ -34,9 +34,9 @@ final class MariachiUnitTests: XCTestCase {
     let reviewData = try JSONSerialization.data(withJSONObject: reviewsData, options: [])
     let reviews = try JSONDecoder().decode([Review].self, from: reviewData)
 
-    XCTAssertTrue(reviews[0].isReviewed)
-    XCTAssertTrue(reviews[1].isReviewed)
-    XCTAssertFalse(reviews[2].isReviewed)
+    XCTAssertTrue(reviews[0].isApproved)
+    XCTAssertFalse(reviews[1].isApproved)
+    XCTAssertFalse(reviews[2].isApproved)
   }
 
   func testUniquingUsers() throws {

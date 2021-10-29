@@ -79,7 +79,7 @@ public class Review: Decodable {
       state
   }
 
-  var isReviewed: Bool {
+  var isApproved: Bool {
       reviewState == "APPROVED"
   }
 }
@@ -100,7 +100,7 @@ public extension Array where Element: PullRequest {
   func needing(minApprovals: Int) -> [PullRequest] {
       var needingApprovalsTemp = [PullRequest]()
       for pull in self {
-        let validReviews = pull.reviews?.filter { $0.isReviewed }.uniquingReviewers.count ?? 0
+        let validReviews = pull.reviews?.filter { $0.isApproved }.uniquingReviewers.count ?? 0
           if validReviews < minApprovals {
               needingApprovalsTemp.append(pull)
           }
