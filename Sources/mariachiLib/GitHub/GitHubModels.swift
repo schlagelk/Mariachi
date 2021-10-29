@@ -80,7 +80,7 @@ public class Review: Decodable {
   }
 
   var isReviewed: Bool {
-      reviewState == "APPROVED" || reviewState == "CHANGES_REQUESTED"
+      reviewState == "APPROVED"
   }
 }
 
