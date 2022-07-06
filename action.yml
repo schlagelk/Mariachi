@@ -20,3 +20,9 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+    INPUT_TEAMS_URL: ${{ inputs.teams_url }}
+    INPUT_EXCLUDE_HEADS: ${{ inputs.exclude_heads }}
+    INPUT_EXCLUDE_LABELS: ${{ inputs.exclude_labels }}
+    INPUT_MIN_REVIEWS: ${{ inputs.min_reviews }}
