@@ -2,7 +2,7 @@ name: 'Mariachi'
 description: 'Sends Pull Request review reminders to Microsoft Teams channels'
 inputs:
   github_token:
-    description: 'This is the default token set and created by GitHub. you can also use a personal access token with repo scope enabled, but this one is already available'
+    description: 'This is the default token set and created by GitHub. You can also use a personal access token with repo scope enabled, but this one is already available'
     required: false
     default: ${{ github.token }}
   teams_url: 
