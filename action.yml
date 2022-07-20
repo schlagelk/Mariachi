@@ -12,7 +12,7 @@ inputs:
     description: 'Head Git branches to exclude'
     required: false
   exclude_labels:
-    description: 'Lables to exclude'
+    description: 'Labels to exclude'
     required: false
   min_reviews:
     description: 'Minimum number of reviews needed'
