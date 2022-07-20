@@ -6,7 +6,7 @@ inputs:
     required: false
     default: ${{ github.token }}
   teams_url: 
-    description: "your Teams channel's webhook URL. here we assume it's in your repo's secrets store"
+    description: 'Your Teams channel's webhook URL. Here we assume it's in your repo's secrets store'
     required: true
   exclude_heads:
     description: 'Head Git branches to exclude'
