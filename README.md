@@ -28,13 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Mariachi
-      uses: docker://schlagelk/mariachi:latest
+      uses: schlagelk/mariachi:main
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }} # this is the default token set and created by GitHub. you can also use a personal access token with repo scope enabled, but this one is already available
+        # Required:
         teams_url: ${{ secrets.TEAMS_TOKEN }} # your Teams channel's webhook URL. here we assume it's in your repo's secrets store
-        exclude_heads: release,foo,bar # optional
-        exclude_labels: skip-reminder,do not review # optional
-        min_reviews: 3 # optional
+        # Optional:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Uses the default Github Actions token created by Github. You can also use a personal access token with repo scope enabled, but this one is already available
+        exclude_heads: release,foo,bar
+        exclude_labels: skip-reminder,do not review
+        min_reviews: 3
 ```
 
 #### CircleCI Example ####

@@ -197,13 +197,15 @@
       <span class="pl-ent">runs-on</span>: <span class="pl-s">ubuntu-latest</span>
       <span class="pl-ent">steps</span>:
       - <span class="pl-ent">name</span>: <span class="pl-s">Mariachi</span>
-      <span class="pl-ent">uses</span>: <span class="pl-s">docker://schlagelk/mariachi:latest</span>
+      <span class="pl-ent">uses</span>: <span class="pl-s">schlagelk/mariachi:main</span>
         <span class="pl-ent">with</span>:
-          <span class="pl-ent">github_token</span>: <span class="pl-s">${{ secrets.GITHUB_TOKEN }}</span>
+          <span class='comment'># Required:</span>
           <span class="pl-ent">teams_url</span>: <span class="pl-s">${{ secrets.TEAMS_TOKEN }} </span><span class='comment'># your Teams URL from step 1</span>
-          <span class="pl-ent">exclude_heads</span>: <span class="pl-s">release,test</span><span class='comment'> # optional</span>
-          <span class="pl-ent">exclude_labels</span>: <span class="pl-s">do-not-review,skip-mariachi</span><span class='comment'> # optional</span>
-          <span class="pl-ent">min_reviews</span>: <span class="pl-c1">3</span><span class='comment'> # optional, defaults to 2</span></pre>
+          <span class='comment'># Optional:</span>
+          <span class="pl-ent">github_token</span>: <span class="pl-s">${{ secrets.GITHUB_TOKEN }}</span><span class='comment'> # # Uses the default Github Actions token created by Github. You can also use a personal access token with repo scope enabled, but this one is already available</span>
+          <span class="pl-ent">exclude_heads</span>: <span class="pl-s">release,test</span>
+          <span class="pl-ent">exclude_labels</span>: <span class="pl-s">do-not-review,skip-mariachi</span>
+          <span class="pl-ent">min_reviews</span>: <span class="pl-c1">3</span><span class='comment'> # Defaults to 2</span></pre>
       </div>
     </div>
     <p class="has-text-centered" style="font-size:.88em;width:80%;margin:auto;margin-top:2.5em">
