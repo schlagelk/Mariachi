@@ -26,14 +26,16 @@ on:
 jobs:
   look_for_prs_needing_reviews:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
     - name: Mariachi
       uses: schlagelk/mariachi:main
       with:
         # Required:
         teams_url: ${{ secrets.TEAMS_TOKEN }} # your Teams channel's webhook URL. here we assume it's in your repo's secrets store
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Make sure you include the job permission pull-requests: read
         # Optional:
-        github_token: ${{ secrets.GITHUB_TOKEN }} # Uses the default Github Actions token created by Github. You can also use a personal access token with repo scope enabled, but this one is already available
         exclude_heads: release,foo,bar
         exclude_labels: skip-reminder,do not review
         min_reviews: 3
