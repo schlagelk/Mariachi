@@ -2,9 +2,8 @@ name: 'Mariachi'
 description: 'Sends Pull Request review reminders to Microsoft Teams channels'
 inputs:
   github_token:
-    description: 'This is the default token set and created by GitHub. You can also use a personal access token with repo scope enabled, but this one is already available'
-    required: false
-    default: ${{ github.token }}
+    description: 'The GITHUB_TOKEN secret. It must have the pull-requests: read permission. You can also use a personal access token with repo scope enabled, but this one is already available'
+    required: true
   teams_url: 
     description: 'Your Teams channel's webhook URL. Here we assume it's in your repo's secrets store'
     required: true
